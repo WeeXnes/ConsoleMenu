@@ -27,7 +27,22 @@ static void Main()
             }),
             new GUI.MenuItem("Test Item 2", () =>
             {
-                VanillaConsole.Title = "Called from Item 2";
+                GUI.CmdMenu cache = GuiHandleWorkers.CurrentMenu;
+                GuiHandleWorkers.CurrentMenu = new GUI.CmdMenu("Test Sub menu", new List<GUI.MenuItem>()
+                {
+                    new GUI.MenuItem("Test Sub Item 1", () =>
+                    {
+                        VanillaConsole.Title = "Called from Sub Menu Button 1";
+                    }),
+                    new GUI.MenuItem("Test Sub Item 2", () =>
+                    {
+                        VanillaConsole.Title = "Called from Sub Menu Button 2";
+                    }),
+                    new GUI.MenuItem("Back", () =>
+                    {
+                        GuiHandleWorkers.CurrentMenu = cache;
+                    })
+                });
             }),
             new GUI.MenuItem("Test Item 3", () =>
             {
